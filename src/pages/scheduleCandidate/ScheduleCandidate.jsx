@@ -157,40 +157,31 @@ const ScheduleCandidate = () => {
   };
   // END OF MISCELLANEOUS
 
-  // DATE SELECTION AND CHANGE FUNCTIONALITIES
-  const [startDate, setStartDate] = useState(new Date());
-  // function for handling date chande
-  const handleDateChange = (selectedDate) => {
-    setStartDate(selectedDate);
-    // end of function for handling date chande
-  };
-  // END OF DATE SELECTION AND CHANGE FUNCTIONALITIES
-
-  //  FUNCTIONALITIES FOR FETCHING AND SETTING CLIENTS
-  const [clients, setClients] = useState([]);
-  // function to get all clients
-  const getAllClients = async () => {
-    try {
-      const res = await publicRequest.get("Client/Client-list");
-
-      if (res.data) {
-        setClients(res.data.data);
-        console.log(res.data);
-      } else {
-        console.log(res.data);
-      }
-    } catch (error) {
-      console.log(error);
+  // function for seting candidate info
+  const [clientId, setClientId] = useState(1);
+  const handlescheduleCandidateInfo = (e, dataName, data) => {
+    if (dataName === "test") {
+      setScheduleInfo((prev) => {
+        return {
+          ...prev,
+          testcategory: data?.categoryName,
+        };
+      });
+    }
+    //  else if (dataName === "clientid") {
+    //   setScheduleInfo((prev) => {
+    //     return { ...prev, [dataName]: data?.clientId?.toString() };
+    //   });
+    //   setClientId(data?.clientId);
+    //   setLoadingTestCategory(true);
+    // }
+    else {
+      setScheduleInfo((prev) => {
+        return { ...prev, [dataName]: e.target.value };
+      });
     }
   };
-  // end of function to get all clients
-
-  // use effect to call the getAllClients function as the page loads
-  useEffect(() => {
-    getAllClients();
-  }, []);
-  // end of use effect to call the getAllClients function as the page loads
-  //  END OF FUNCTIONALITIES FOR FETCHING AND SETTING CLIENTS
+  // end of function for seting candidate info
 
   // FUNCTIONALITY FOR SETTING SCHEDULE INFO
   const [scheduleInfo, setScheduleInfo] = useState({
@@ -199,37 +190,12 @@ const ScheduleCandidate = () => {
     createdDate: date,
     email: "",
     address: "",
-    appointmentdate: startDate?.toISOString(),
-    clientid: "",
+    appointmentdate: null,
+    clientid: clientId?.toString(),
     testcategory: "",
     status: "PENDING",
   });
 
-  // function for seting candidate info
-  const [clientId, setClientId] = useState(1);
-  const handlescheduleCandidateInfo = (e, dataName, data) => {
-    if (dataName === "test") {
-      console.log(data);
-
-      setScheduleInfo((prev) => {
-        return {
-          ...prev,
-          testcategory: data?.categoryName,
-        };
-      });
-    } else if (dataName === "clientid") {
-      setScheduleInfo((prev) => {
-        return { ...prev, [dataName]: data?.clientId?.toString() };
-      });
-      setClientId(data?.clientId);
-      setLoadingTestCategory(true);
-    } else {
-      setScheduleInfo((prev) => {
-        return { ...prev, [dataName]: e.target.value };
-      });
-    }
-  };
-  // end of function for seting candidate info
   // useeffect for updating client id
   useEffect(() => {}, [clientId]);
   // end of useeffect for updating client id
@@ -284,6 +250,21 @@ const ScheduleCandidate = () => {
   // end of function for creating a test category
 
   // END OF FUNCTIONALITY FOR SETTING SCHEDULE INFO
+
+  // DATE SELECTION AND CHANGE FUNCTIONALITIES
+  const [startDate, setStartDate] = useState(new Date());
+  // function for handling date chande
+  const handleDateChange = (selectedDate) => {
+    setStartDate(selectedDate);
+    setScheduleInfo((prev) => {
+      return {
+        ...prev,
+        appointmentdate: selectedDate?.toISOString(),
+      };
+    });
+    // end of function for handling date chande
+  };
+  // END OF DATE SELECTION AND CHANGE FUNCTIONALITIES
   //  FUNCTIONALITIES FOR FETCHING AND SETTING TEST CATEGORIES
   const [testCategory, setTestCategory] = useState([]);
 
@@ -309,7 +290,7 @@ const ScheduleCandidate = () => {
   // use effect to call the getAllTestCategories function as the page loads
   useEffect(() => {
     getAllTestCategories();
-  }, [clientId]);
+  }, []);
   // end of use effect to call the getAllTestCategories function as the page loads
   //  END OF FUNCTIONALITIES FOR FETCHING AND SETTING TEST CATEGORIES
 
@@ -345,7 +326,7 @@ const ScheduleCandidate = () => {
     try {
       await axios
         .post(
-          "http://15.237.160.238:60/api/Candidate/read-Candidate-csv",
+          "https://app.biopathonline.com/api/Candidate/read-Candidate-csv",
           { file: selectedFile },
           {
             headers: {
