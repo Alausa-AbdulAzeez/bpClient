@@ -7,10 +7,14 @@ import Topber from '../../components/topbar/Topber'
 import './home.scss'
 import { clientDashboardData } from '../../utils/data/dashboardCardData'
 import Homedatagrid from '../../components/homeDatagrid/Homedatagrid'
+import { useSelector } from 'react-redux'
 
-const Home = (props) => {
+const Home = () => {
+  // LOGGED IN USER
   // eslint-disable-next-line react/prop-types
-  const loggedInUserRole = props.userDetails?.role
+  const { currentUser } = useSelector((state) => state?.user)
+  const userName = currentUser?.data?.profile?.clientName
+  const loggedInUserRole = currentUser?.data?.role
 
   let data = clientDashboardData
   // HANDLE CARD INFO
@@ -48,7 +52,7 @@ const Home = (props) => {
     <div className='homeWrapper'>
       <Sidebar loggedInUserRole={loggedInUserRole} />
       <div className='homepageRight'>
-        <Topber userName={props.userDetails?.name} />
+        <Topber userName={userName} />
         <div className='homeMainWrapper'>
           <div className='homeMainTop'>
             {data.map((singleItem, index) => {
@@ -57,7 +61,7 @@ const Home = (props) => {
                   type='manageClients'
                   data={singleItem}
                   key={index}
-                  userName={props.userDetails?.name}
+                  userName={userName}
                 />
               )
             })}

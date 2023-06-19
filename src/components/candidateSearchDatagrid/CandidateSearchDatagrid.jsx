@@ -11,14 +11,22 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { DataGrid } from '@mui/x-data-grid'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaAngleDown } from 'react-icons/fa'
 import { MdCancel } from 'react-icons/md'
 import './candidateSearchDatagrid.scss'
 
 const CandidateSearchDatagrid = (props) => {
+  // ROWS PER PAGE
   const [pageSize, setPageSize] = useState(5)
+
+  // INITIAL SLIDE
   const [position, setPosition] = useState('-100%')
+
+  // SELECTED CANDIDATE AFTER ROW CLICK
+  const [selectedCandidate, setSelecedCandidate] = useState({})
+
+  console.log(props?.userDetails)
   let rows = [
     {
       id: 1,
@@ -117,9 +125,10 @@ const CandidateSearchDatagrid = (props) => {
     },
     { field: 'date2', headerName: 'Date Received', width: 220 },
   ]
-  let title = 'Pending Candiates'
-  let leftBtnText
-  let rightBtnText
+
+  // GRID TITLE
+  let title = 'Candiates'
+
   // eslint-disable-next-line react/prop-types
   const loggedInUserRole = props.userDetails?.role
   // const loggedInUserRole = 'phlebotomist'
@@ -133,21 +142,21 @@ const CandidateSearchDatagrid = (props) => {
 
   // HANDLE ROW CLICK
   const handleRowClick = (row, e) => {
-    // if (e.target.textContent !== 'Authorize') {
-    //   if (position !== '0') {
-    //     setPosition('0')
-    //   }
-    // }
+    setSelecedCandidate(row?.row)
+    if (position !== '0') {
+      setPosition('0')
+    }
+
     console.log(row, e)
   }
   // END OF HANDLE ROW CLICK
 
-  // HANDLE ROW CLICK
+  // HANDLE SLIDE HIDE
   const handleHideSlide = () => {
     // setPosition('-100%')
     console.log('hello')
   }
-  // END OF HANDLE ROW CLICK
+  // END OF HANDLE SLIDE HIDE
 
   // switch (loggedInUserRole) {
   //   case 'receptionist':
@@ -180,6 +189,9 @@ const CandidateSearchDatagrid = (props) => {
   //   default:
   //     break
   // }
+
+  // USEEFFECT TO UPDATE SELECTED ROW
+  useEffect(() => {}, [selectedCandidate])
   return (
     <div className='datagridWraper'>
       <div className='slide' style={{ right: position }}>
@@ -187,148 +199,26 @@ const CandidateSearchDatagrid = (props) => {
           <div className='cancelconWrapper' onClick={handleHideSlide}>
             <MdCancel className='cancelIcon' />
           </div>
-          <div className='initials'>AA</div>
-          <div className='slideFullname'>Alausa Abdulazeez</div>
+          <div className='initials'>
+            {selectedCandidate?.candidateName &&
+              selectedCandidate?.candidateName[0]?.toUpperCase()}
+          </div>
+          <div className='slideFullname'>
+            {selectedCandidate?.candidateName?.toUpperCase()}
+          </div>
         </div>
         <div className='companyName h3'>
           <h3>Company Name</h3>
-          <p>Chicken Republic</p>
+          <p>{selectedCandidate?.phoneNumber}</p>
         </div>
 
         <div className='phoneNo h3'>
           <h3>Candidate Phone Number</h3>
-          <p>+23456789010</p>
+          <p>{selectedCandidate?.phoneNumber}</p>
         </div>
         <div className='numberOfTests h3'>
-          <h3>Number of Tests</h3>
-          <p>3</p>
-        </div>
-        {loggedInUserRole === 'receptionist' && (
-          <div className='listOfTests'>
-            <div className='singleTest'></div>
-            <h3>Number of Tests</h3>
-            <p>
-              1. <span>Malaria test</span>
-            </p>
-          </div>
-        )}
-        {loggedInUserRole === 'phlebotomist' && (
-          <div className='basicDetailsWrapper'>
-            <FormControl className='genderSelect'>
-              <InputLabel id='demo-simple-select-label'>Gender</InputLabel>
-              <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                //   value={age}
-                label='Company name'
-                //   onChange={handleChange}
-              >
-                <MenuItem value={10}>M</MenuItem>
-                <MenuItem value={20}>F</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField
-              id='outlined-search'
-              label='Age'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='Temperature'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='Weight'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='Height'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='BMI'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='Blood Pressure'
-              type='search'
-              className='candidateName basicCandidateDetailsInput'
-            />
-          </div>
-        )}
-
-        {loggedInUserRole === 'labScientist' && (
-          <>
-            <div className='qualityAssuranceAccordionWrapper'>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<FaAngleDown />}
-                  aria-controls='panel2a-content'
-                  id='panel2a-header'
-                >
-                  <Typography>Candidate Details</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </div>
-            <div className='basicDetailsWrapper'>
-              <TextField
-                id='outlined-search'
-                label='PCV'
-                type='search'
-                className='candidateName basicCandidateDetailsInput'
-              />
-              <TextField
-                id='outlined-search'
-                label='Blood Pressure'
-                type='search'
-                className='candidateName basicCandidateDetailsInput'
-              />
-            </div>
-          </>
-        )}
-        {loggedInUserRole === 'qualityAssurance' && (
-          <div className='qualityAssuranceAccordionWrapper'>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<FaAngleDown />}
-                aria-controls='panel2a-content'
-                id='panel2a-header'
-              >
-                <Typography>Test Details</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-        )}
-        <div className='bottomButtons'>
-          {leftBtnText && (
-            <div className='authorize sendDetails'>{leftBtnText}</div>
-          )}
-          {rightBtnText?.length > 0 && (
-            <div className='authorize'>{rightBtnText}</div>
-          )}
+          <h3>{"Candidate's Email"}</h3>
+          <p>{selectedCandidate?.email}</p>
         </div>
       </div>
       <div className='boxWrapper'>

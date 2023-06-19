@@ -75,6 +75,17 @@
         margin: 50px auto;
         width: 100%;
 
+        .passwordWrapper {
+          position: relative;
+
+          & > span {
+            position: absolute;
+            top: 20%;
+            right: 30px;
+            cursor: pointer;
+          }
+        }
+
         input {
           width: 100%;
           margin-bottom: 20px;
@@ -90,6 +101,18 @@
           &:focus {
             outline: none;
             border-bottom: 1px solid rgb(0, 0, 0);
+          }
+        }
+
+        .forgotPassword {
+          text-align: center;
+          font-size: small;
+          font-weight: bold;
+          color: #5576ae;
+          transition: all ease-in-out 0.2s;
+
+          &:hover {
+            color: #263753;
           }
         }
       }

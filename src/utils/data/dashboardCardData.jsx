@@ -6,7 +6,7 @@ import { BsFillPersonFill } from 'react-icons/bs'
 export const clientDashboardData = [
   {
     title: 'Schedule Candidate',
-    isMoney: true,
+    isMoney: false,
     link: 'scheduleCandidate',
     linkText: 'Schedule Candidate',
     backgroundColor: '#33a23e24',

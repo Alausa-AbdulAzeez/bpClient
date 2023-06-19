@@ -14,10 +14,12 @@ import CandidateSearchDatagrid from '../../components/candidateSearchDatagrid/Ca
 import Loading from '../../components/loading/Loading'
 import ErrorComponent from '../../components/error/Error'
 import { publicRequest } from '../../functions/requestMethods'
+import { useSelector } from 'react-redux'
 
 const CandidateSearch = (props) => {
-  // const [searched, setSearched] = useState(false);
-  const loggedInUserRole = props.userDetails?.role
+  // LOGGED IN USER
+  const { currentUser } = useSelector((state) => state?.user)
+  const clientId = currentUser?.data?.profile?.clientId
 
   // LOADING AND ERROR DATA
   const [loading, setLoading] = useState(false)
@@ -31,7 +33,9 @@ const CandidateSearch = (props) => {
   const getAllCandidates = async () => {
     try {
       setLoading(true)
-      const res = await publicRequest.get('/Candidate')
+      const res = await publicRequest.get(
+        `/Candidate/SearchByClientID?Clientid=${clientId}`
+      )
 
       if (res.data) {
         setRows(res.data?.data?.reverse())
@@ -56,7 +60,7 @@ const CandidateSearch = (props) => {
 
   return (
     <div className='candidateSearchWrapper'>
-      <Sidebar loggedInUserRole={loggedInUserRole} />
+      <Sidebar />
       <div className='candidateSearchRight'>
         <Topber userName={props?.userDetails?.name} />
         {loading || error ? (
@@ -103,7 +107,7 @@ const CandidateSearch = (props) => {
                 <h3>Nothing to see here, yet</h3>
               </>
             )} */}
-              {<CandidateSearchDatagrid userDetails={props.userDetails} />}
+              {<CandidateSearchDatagrid userDetails={rows} />}
             </div>
           </div>
         )}

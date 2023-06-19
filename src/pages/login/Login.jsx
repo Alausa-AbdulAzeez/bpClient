@@ -1,15 +1,24 @@
 import { useState, useEffect, React, useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import BackgroundImg from '../../utils/images/IMG_6229.png'
 import './login.scss'
 import { login } from '../../redux/apiCalls'
 import { ToastContainer } from 'react-toastify'
+import { BsEye, BsFillEyeSlashFill } from 'react-icons/bs'
 
 const Register = () => {
   // MISCELLANEOUS
   const toastId = useRef(null)
   const dispatch = useDispatch()
+
+  // PASSWORD VISIBILITY
+  const [showPassword, setShowPassword] = useState(false)
+
+  // FUNCTION FOR PASSWORD TOGGLE
+  const handlePasswordToggle = () => {
+    setShowPassword((prev) => !prev)
+  }
 
   // USER LOGIN DETAILS
   const [user, setUser] = useState({
@@ -80,13 +89,21 @@ const Register = () => {
                 onChange={(e) => handleSetUser(e, 'email')}
               />
               <label htmlFor=''>Password</label>
-              <input
-                type='password'
-                className='loginPasswordInput loginInput'
-                placeholder='Password'
-                onChange={(e) => handleSetUser(e, 'password')}
-                data-testid='passwordTestId'
-              />
+              <div className='passwordWrapper'>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  className='loginPasswordInput loginInput'
+                  placeholder='Password'
+                  onChange={(e) => handleSetUser(e, 'password')}
+                  data-testid='passwordTestId'
+                />
+                <span onClick={handlePasswordToggle}>
+                  {showPassword ? <BsEye /> : <BsFillEyeSlashFill />}
+                </span>
+              </div>
+              <Link to={'/getToken'}>
+                <div className='forgotPassword'>Forgotten your password?</div>
+              </Link>
             </div>
 
             <button
