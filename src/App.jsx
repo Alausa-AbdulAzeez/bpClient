@@ -6,83 +6,60 @@ import Home from './pages/home/Home'
 import CandidateSearch from './pages/candidateSearch/CandidateSearch'
 import PendingCandidates from './pages/pendingCandidates/PendingCandidates'
 import ViewClients from './pages/viewClients/ViewClients'
-import { useSelector } from 'react-redux'
 import Reports from './pages/reports/Reports'
 import ScheduleCandidate from './pages/scheduleCandidate/ScheduleCandidate'
+import ResetPassword from './pages/resetPassword/ResetPassword'
+import ForgotPassword from './pages/forgotPassword/ForgotPassword'
+import ChangePassword from './pages/changePassword/ChangePassword'
 
 function App() {
-  let userDetails
+  // let userDetails
   // const user = sessionStorage.getItem('user')
   // const [user, setUser] = useState(sessionStorage.getItem('user'))
-  const user = useSelector((state) => state.globalState.globalState.user)
 
   // FUNCTION FOR SETTING USER DETAILS
-  switch (user?.email) {
-    case 'e@gmail.com':
-      userDetails = { name: 'Esther', role: 'receptionist' }
-      break
-    case 'o@gmail.com':
-      userDetails = { name: 'Olamide', role: 'phlebotomist' }
-      console.log('Olamide')
-      break
-    case 'ada@gmail.com':
-      userDetails = { name: 'Ada', role: 'labScientist' }
-      break
-    case 'ade@gmail.com':
-      userDetails = { name: 'Adetola', role: 'reportOfficer' }
-      break
-    case 'b@gmail.com':
-      userDetails = { name: 'Bankole', role: 'qualityAssurance' }
-      break
+  // switch (user?.email) {
+  //   case 'e@gmail.com':
+  //     userDetails = { name: 'Esther', role: 'receptionist' }
+  //     break
+  //   case 'o@gmail.com':
+  //     userDetails = { name: 'Olamide', role: 'phlebotomist' }
+  //     console.log('Olamide')
+  //     break
+  //   case 'ada@gmail.com':
+  //     userDetails = { name: 'Ada', role: 'labScientist' }
+  //     break
+  //   case 'ade@gmail.com':
+  //     userDetails = { name: 'Adetola', role: 'reportOfficer' }
+  //     break
+  //   case 'b@gmail.com':
+  //     userDetails = { name: 'Bankole', role: 'qualityAssurance' }
+  //     break
 
-    case 'client@gmail.com':
-      userDetails = { name: 'Unity Bank', role: 'qualityAssurance' }
-      break
+  //   case 'client@gmail.com':
+  //     userDetails = { name: 'Unity Bank', role: 'qualityAssurance' }
+  //     break
 
-    default:
-      break
-  }
+  //   default:
+  //     break
+  // }
 
   // END OF FUNCTION FOR SETTING USER DETAILS
-
-  useEffect(() => {}, [user])
 
   return (
     <div className='appWrapper'>
       <BrowserRouter>
         <Routes>
           <Route exact path='/login' element={<Register />} />
-          <Route
-            exact
-            path='/'
-            element={<Home userDetails={userDetails && userDetails} />}
-          />
-          <Route
-            path='/candidates'
-            element={
-              <CandidateSearch userDetails={userDetails && userDetails} />
-            }
-          />
-          <Route
-            path='/scheduleCandidate'
-            element={
-              <ScheduleCandidate userDetails={userDetails && userDetails} />
-            }
-          />
-          <Route
-            path='/pendingCandidates'
-            element={
-              <PendingCandidates userDetails={userDetails && userDetails} />
-            }
-          />
-          <Route
-            path='/viewClients'
-            element={<ViewClients userDetails={userDetails && userDetails} />}
-          />
-          <Route
-            path='/reports'
-            element={<Reports userDetails={userDetails && userDetails} />}
-          />
+          <Route exact path='/' element={<Home />} />
+          <Route path='/candidates' element={<CandidateSearch />} />
+          <Route path='/scheduleCandidate' element={<ScheduleCandidate />} />
+          <Route path='/pendingCandidates' element={<PendingCandidates />} />
+          <Route path='/viewClients' element={<ViewClients />} />
+          <Route path='/reports' element={<Reports />} />
+          <Route path='/getToken' element={<ForgotPassword />} />
+          <Route path='/forgotPassword' element={<ResetPassword />} />
+          <Route path='/changePassword' element={<ChangePassword />} />
         </Routes>
       </BrowserRouter>
     </div>
