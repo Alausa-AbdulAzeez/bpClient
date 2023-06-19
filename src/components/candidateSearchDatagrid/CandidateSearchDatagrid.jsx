@@ -153,8 +153,7 @@ const CandidateSearchDatagrid = (props) => {
 
   // HANDLE SLIDE HIDE
   const handleHideSlide = () => {
-    // setPosition('-100%')
-    console.log('hello')
+    setPosition('-100%')
   }
   // END OF HANDLE SLIDE HIDE
 
