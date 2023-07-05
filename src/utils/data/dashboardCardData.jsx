@@ -8,6 +8,7 @@ export const clientDashboardData = [
     title: 'Schedule Candidate',
     isMoney: false,
     link: 'scheduleCandidate',
+    isScheduleCandidate: true,
     linkText: 'Schedule Candidate',
     backgroundColor: '#33a23e24',
     name: '2',
@@ -23,6 +24,7 @@ export const clientDashboardData = [
     isMoney: false,
     link: 'candidateSearch',
     linkText: 'See all laboratories',
+    isCandidateSearch: true,
     backgroundColor: '#ece8ff7b',
     name: '50',
     icon: (
@@ -52,6 +54,7 @@ export const clientDashboardData = [
     title: 'Profile',
     isMoney: true,
     link: '/profile',
+    isProfile: true,
     linkText: 'View profile',
     backgroundColor: '#3971ff24',
     name: 'Unity Bank',
