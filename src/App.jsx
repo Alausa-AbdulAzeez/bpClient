@@ -12,6 +12,8 @@ import ResetPassword from './pages/resetPassword/ResetPassword'
 import ForgotPassword from './pages/forgotPassword/ForgotPassword'
 import ChangePassword from './pages/changePassword/ChangePassword'
 import PrivateRoutes from './components/PrivateRoutes'
+import DownloadReportPage from './pages/downloadReport/DownloadReportPage'
+import Profile from './pages/profile/Profile'
 
 function App() {
   // let userDetails
@@ -58,6 +60,11 @@ function App() {
             <Route path='/pendingCandidates' element={<PendingCandidates />} />
             <Route path='/viewClients' element={<ViewClients />} />
             <Route path='/reports' element={<Reports />} />
+            <Route
+              path='/labReport/:candidate'
+              element={<DownloadReportPage />}
+            />
+            <Route path='/profile' element={<Profile />} />
           </Route>
           <Route exact path='/login' element={<Register />} />
           <Route path='/getToken' element={<ForgotPassword />} />

@@ -28,11 +28,11 @@ export const clientData = [
         link: '/candidates',
         icon: <AiOutlineSearch className='sidebarIcon' />,
       },
-      {
-        title: 'Pending Candidates',
-        link: '/pendingCandidates',
-        icon: <MdPendingActions className='sidebarIcon' />,
-      },
+      // {
+      //   title: 'Pending Candidates',
+      //   link: '/pendingCandidates',
+      //   icon: <MdPendingActions className='sidebarIcon' />,
+      // },
       {
         title: 'Reports',
         link: '/reports',

@@ -21,107 +21,49 @@ import { FaAngleDown } from 'react-icons/fa'
 const PendingCandidatesDatagrid = (props) => {
   const [pageSize, setPageSize] = useState(5)
   const [position, setPosition] = useState('-100%')
-  let rows = [
-    {
-      id: 1,
-      lastName: 'Snow',
-      firstName: '1',
-      date: '1-March-2023',
-      date2: null,
-      age: 35,
-      attendedTo: 'true',
-    },
-    {
-      id: 2,
-      lastName: 'Lannister',
-      date: '1-March-2023',
-      date2: null,
-      firstName: '1',
-      age: 42,
-      attendedTo: 'true',
-    },
-    {
-      id: 3,
-      lastName: 'Lannister',
-      firstName: '3',
-      date: '1-March-2023',
-      date2: null,
-      age: 45,
-      attendedTo: 'true',
-    },
-    {
-      id: 4,
-      lastName: 'Stark',
-      firstName: '3',
-      date: '1-March-2023',
-      date2: null,
-      age: 16,
-      attendedTo: 'true',
-    },
-    {
-      id: 5,
-      lastName: 'Targaryen',
-      firstName: '2',
-      age: null,
-      date: '1-March-2023',
-      date2: null,
-      attendedTo: 'true',
-    },
-    {
-      id: 6,
-      lastName: 'Melisandre',
-      firstName: '2',
-      age: 150,
-      date: '1-March-2023',
-      date2: null,
-      attendedTo: 'true',
-    },
-    {
-      id: 7,
-      lastName: 'Clifford',
-      firstName: '3',
-      age: 44,
-      attendedTo: 'true',
-      date: '1-March-2023',
-      date2: null,
-    },
-    { id: 8, lastName: 'Frances', firstName: '3', age: 36, attendedTo: 'true' },
-    { id: 9, lastName: 'Roxie', firstName: '3', age: 65, attendedTo: 'true' },
-  ]
+  let rows = props?.tableData
   let columns = [
     {
-      field: 'lastName',
+      field: 'candidateName',
       headerName: 'Candidate Name',
       width: 250,
       editable: false,
     },
-    // { field: 'id', headerName: 'Company Name', width: 190 },
+    { field: 'clientName', headerName: 'Client Name', width: 250 },
     {
-      field: 'firstName',
-      headerName: 'Number of tests',
-      width: 180,
+      field: 'testcategory',
+      headerName: 'Test Category',
+      width: 200,
       editable: false,
     },
-
-    { field: 'date', headerName: 'Appointment Date', width: 220 },
-
     {
-      field: 'role',
-      headerName: 'Report Status',
-      width: 180,
-      renderCell: () => {
+      field: 'action',
+      headerName: 'Action',
+      width: 130,
+      renderCell: (params) => {
         return (
           <>
-            <div className='reportNotSent'>Not Received</div>
+            {loggedInUserRole === 'Reception' && (
+              <div
+                className='notAuthorized'
+                onClick={() => authorizeUser(params, 'main')}
+              >
+                Authorize
+              </div>
+            )}
+            {(loggedInUserRole === 'Phlebotomy' ||
+              loggedInUserRole === 'MainLab1' ||
+              loggedInUserRole === 'Report' ||
+              loggedInUserRole === 'Quality assurance') && (
+              <div className='notAuthorized'>View</div>
+            )}
           </>
         )
       },
     },
-    { field: 'date2', headerName: 'Date Received', width: 220 },
   ]
   let title = 'Pending Candiates'
-  let leftBtnText
-  let rightBtnText
+
   const loggedInUserRole = props.userDetails?.role
   const user = useSelector((state) =>
     console.log(state.globalState.globalState)
@@ -243,130 +185,6 @@ const PendingCandidatesDatagrid = (props) => {
             </p>
           </div>
         )}
-        {loggedInUserRole === 'phlebotomist' && (
-          <div className='basicDetailsWrapper'>
-            <FormControl className='genderSelect'>
-              <InputLabel id='demo-simple-select-label'>Gender</InputLabel>
-              <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                //   value={age}
-                label='Company name'
-                //   onChange={handleChange}
-              >
-                <MenuItem value={10}>M</MenuItem>
-                <MenuItem value={20}>F</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField
-              id='outlined-search'
-              label='Age'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='Temperature'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='Weight'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='Height'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='BMI'
-              type='number'
-              className='candidateName basicCandidateDetailsInput'
-            />
-            <TextField
-              id='outlined-search'
-              label='Blood Pressure'
-              type='search'
-              className='candidateName basicCandidateDetailsInput'
-            />
-          </div>
-        )}
-        {loggedInUserRole === 'labScientist' && (
-          <>
-            <div className='qualityAssuranceAccordionWrapper'>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<FaAngleDown />}
-                  aria-controls='panel2a-content'
-                  id='panel2a-header'
-                >
-                  <Typography>Candidate Details</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </div>
-            <div className='basicDetailsWrapper'>
-              <TextField
-                id='outlined-search'
-                label='PCV'
-                type='search'
-                className='candidateName basicCandidateDetailsInput'
-              />
-              <TextField
-                id='outlined-search'
-                label='Blood Pressure'
-                type='search'
-                className='candidateName basicCandidateDetailsInput'
-              />
-            </div>
-          </>
-        )}
-        {loggedInUserRole === 'qualityAssurance' && (
-          <div className='qualityAssuranceAccordionWrapper'>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<FaAngleDown />}
-                aria-controls='panel2a-content'
-                id='panel2a-header'
-              >
-                <Typography>Test Details</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-        )}
-        <div className='bottomButtons'>
-          {leftBtnText && (
-            <div
-              className='authorize sendDetails'
-              onClick={(e) => handleBtnClick(e)}
-            >
-              {leftBtnText}
-            </div>
-          )}
-          {rightBtnText?.length > 0 && (
-            <div className='authorize' onClick={(e) => handleBtnClick(e)}>
-              {rightBtnText}
-            </div>
-          )}
-        </div>
       </div>
       <Box sx={{ height: 350, width: '100%' }}>
         <h3>{title}</h3>

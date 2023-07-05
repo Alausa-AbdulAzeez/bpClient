@@ -9,7 +9,7 @@ import ErrorComponent from '../../components/error/Error'
 import { publicRequest } from '../../functions/requestMethods'
 import { useSelector } from 'react-redux'
 import { RxReload } from 'react-icons/rx'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 
 const CandidateSearch = (props) => {
   // MISCELLANEOUS
@@ -122,78 +122,83 @@ const CandidateSearch = (props) => {
   }, [])
 
   return (
-    <div className='candidateSearchWrapper'>
-      <Sidebar />
-      <div className='candidateSearchRight'>
-        <Topber userName={props?.userDetails?.name} />
-        {loading || error ? (
-          loading ? (
-            <Loading />
+    <>
+      <ToastContainer />
+      <div className='candidateSearchWrapper'>
+        <Sidebar />
+        <div className='candidateSearchRight'>
+          <Topber userName={props?.userDetails?.name} />
+          {loading || error ? (
+            loading ? (
+              <Loading />
+            ) : (
+              <ErrorComponent errorMessage={errorMessage && errorMessage} />
+            )
           ) : (
-            <ErrorComponent errorMessage={errorMessage && errorMessage} />
-          )
-        ) : (
-          <div className='candidateSearchMainWrapper'>
-            <div className='candidateSearchMainTop'>
-              <h3 className='candidateSearchMainTopTitle'>Search</h3>
-              <div className='candidateSearchMainTopForm'>
-                {/* <FormControl className='companySelect'>
-                <InputLabel id='demo-simple-select-label'>
-                  Company name
-                </InputLabel>
-                <Select
-                  labelId='demo-simple-select-label'
-                  id='demo-simple-select'
-                  //   value={age}
-                  label='Company name'
-                  //   onChange={handleChange}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl> */}
-                <TextField
-                  id='outlined-search'
-                  label='Candidate Phone no'
-                  type='search'
-                  className='candidateName'
-                  onChange={(e) => handlePhoneNumberChange(e)}
-                />
+            <div className='candidateSearchMainWrapper'>
+              <div className='candidateSearchMainTop'>
+                <h3 className='candidateSearchMainTopTitle'>Search</h3>
+                <div className='candidateSearchMainTopForm'>
+                  {/* <FormControl className='companySelect'>
+            <InputLabel id='demo-simple-select-label'>
+              Company name
+            </InputLabel>
+            <Select
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              //   value={age}
+              label='Company name'
+              //   onChange={handleChange}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl> */}
+                  <TextField
+                    id='outlined-search'
+                    label='Candidate Phone no'
+                    type='search'
+                    className='candidateName'
+                    onChange={(e) => handlePhoneNumberChange(e)}
+                  />
 
-                <div
-                  className='candidateSearchBtn'
-                  onClick={handleCandidateSearch}
-                >
-                  Search
+                  <div
+                    className='candidateSearchBtn'
+                    onClick={handleCandidateSearch}
+                  >
+                    Search
+                  </div>
+                  <button className='reloadBtn' onClick={getAllCandidates}>
+                    Show All
+                    <span>
+                      <RxReload className='reloadIcon' />
+                    </span>
+                  </button>
                 </div>
-                <button className='reloadBtn' onClick={getAllCandidates}>
-                  Show All
-                  <span>
-                    <RxReload className='reloadIcon' />
-                  </span>
-                </button>
+              </div>
+              <div className='candidateSearchMainBottom'>
+                {loading || error ? (
+                  loading ? (
+                    <Loading />
+                  ) : (
+                    <ErrorComponent
+                      errorMessage={errorMessage && errorMessage}
+                    />
+                  )
+                ) : (
+                  <CandidateSearchDatagrid
+                    userDetails={currentUser}
+                    tableData={rows}
+                    getAllCandidates={getAllCandidates}
+                  />
+                )}
               </div>
             </div>
-            <div className='candidateSearchMainBottom'>
-              {loading || error ? (
-                loading ? (
-                  <Loading />
-                ) : (
-                  <ErrorComponent errorMessage={errorMessage && errorMessage} />
-                )
-              ) : (
-                <CandidateSearchDatagrid
-                  userDetails={currentUser}
-                  tableData={rows}
-                  getAllCandidates={getAllCandidates}
-                />
-              )}
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

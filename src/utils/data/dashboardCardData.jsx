@@ -32,21 +32,21 @@ export const clientDashboardData = [
       />
     ),
   },
-  {
-    title: 'Pending Candidates',
-    isMoney: false,
-    link: 'pendingCandidates',
-    linkText: 'View pending candidates',
-    backgroundColor: '#33a23e24',
-    name: '5',
+  // {
+  //   title: 'Pending Candidates',
+  //   isMoney: false,
+  //   link: 'pendingCandidates',
+  //   linkText: 'View pending candidates',
+  //   backgroundColor: '#33a23e24',
+  //   name: '5',
 
-    icon: (
-      <MdPendingActions
-        className='icon'
-        style={{ color: '#33A23E', backgroundColor: '#33A23E36' }}
-      />
-    ),
-  },
+  //   icon: (
+  //     <MdPendingActions
+  //       className='icon'
+  //       style={{ color: '#33A23E', backgroundColor: '#33A23E36' }}
+  //     />
+  //   ),
+  // },
 
   {
     title: 'Profile',
