@@ -8,8 +8,9 @@ const Profile = () => {
   // GET CURRENT LOGGED IN USER
   const { currentUser } = useSelector((state) => state?.user)
   const loggedInUserRole = currentUser?.data?.role
-  const { fullName, phoneNumber, email } = currentUser?.data?.profile
+  const { clientName, phoneNumber, email } = currentUser?.data?.profile
 
+  console.log(currentUser?.data?.profile)
   return (
     <div className='profileWrapper'>
       <Sidebar />
@@ -26,7 +27,7 @@ const Profile = () => {
                     type='text'
                     className='input'
                     disabled
-                    value={fullName}
+                    value={clientName}
                   />
                 </div>
               </div>

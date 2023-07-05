@@ -6,8 +6,9 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Slide from '@mui/material/Slide'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { persistor } from '../redux/store'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
@@ -16,7 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function AlertDialogSlide(props) {
   // eslint-disable-next-line react/prop-types
   const { open, handleClose, message, title, link } = props
-  const isLoggedIn = localStorage.getItem('isLoggedIn')
+  // const isLoggedIn = localStorage.getItem('isLoggedIn')
   const navigate = useNavigate()
   //   const [open, setOpen] = React.useState(false)
 
@@ -49,10 +50,6 @@ export default function AlertDialogSlide(props) {
   }
   // END OF HANDLE CANCEL CLICK
 
-  useEffect(() => {
-    console.log(isLoggedIn)
-  }, [isLoggedIn])
-
   return (
     <div>
       {/* <Button variant='outlined' onClick={handleClickOpen}>
@@ -72,7 +69,14 @@ export default function AlertDialogSlide(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancelClick}>Yes</Button>
+          <Button
+            onClick={() => {
+              persistor.purge()
+              navigate('/login')
+            }}
+          >
+            Yes
+          </Button>
           <Button onClick={handleClose}>No</Button>
         </DialogActions>
       </Dialog>
