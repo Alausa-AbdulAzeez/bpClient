@@ -21,24 +21,12 @@ const PrivateRoutes = () => {
   useEffect(() => {
     const getAllCandidates = async () => {
       try {
-        await publicRequest
-          .get('/Candidate', {
-            headers: {
-              Accept: '*',
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then(async () => {
-            await publicRequest.get(
-              `/Candidate/SearchByClientID?Clientid=${clientId}`,
-              {
-                headers: {
-                  Accept: '*',
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            )
-          })
+        await publicRequest.get('/Candidate', {
+          headers: {
+            Accept: '*',
+            Authorization: `Bearer ${token}`,
+          },
+        })
       } catch (error) {
         if (
           error?.response?.statusText === 'Unauthorized' ||

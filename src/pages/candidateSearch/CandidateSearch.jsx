@@ -1,129 +1,130 @@
-import { TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Topber from "../../components/topbar/Topber";
-import "./candidateSearch.scss";
-import CandidateSearchDatagrid from "../../components/candidateSearchDatagrid/CandidateSearchDatagrid";
-import Loading from "../../components/loading/Loading";
-import ErrorComponent from "../../components/error/Error";
-import { publicRequest } from "../../functions/requestMethods";
-import { useSelector } from "react-redux";
-import { RxReload } from "react-icons/rx";
-import { toast } from "react-toastify";
+import { TextField } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import Sidebar from '../../components/sidebar/Sidebar'
+import Topber from '../../components/topbar/Topber'
+import './candidateSearch.scss'
+import CandidateSearchDatagrid from '../../components/candidateSearchDatagrid/CandidateSearchDatagrid'
+import Loading from '../../components/loading/Loading'
+import ErrorComponent from '../../components/error/Error'
+import { publicRequest } from '../../functions/requestMethods'
+import { useSelector } from 'react-redux'
+import { RxReload } from 'react-icons/rx'
+import { toast } from 'react-toastify'
 
 const CandidateSearch = (props) => {
   // MISCELLANEOUS
-  const toastId = React.useRef(null);
+  const toastId = React.useRef(null)
 
   // LOGGED IN USER
-  const { currentUser } = useSelector((state) => state?.user);
-  const clientId = currentUser?.data?.profile?.clientId;
+  const { currentUser } = useSelector((state) => state?.user)
+  const clientId = currentUser?.data?.profile?.clientId
 
-  //
+  // GET CURRENT USER TOKEN
+  const token = useSelector((state) => state?.user?.currentUser?.data?.token)
 
   // LOADING AND ERROR DATA
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   // CANDIDATE'S PHONE NUMBER
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState('')
 
   // CANDIDATES
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([])
 
   // FUNCTION TO GET AND SET ALL CANDIDATES
   const getAllCandidates = async () => {
     try {
-      setLoading(true);
+      setLoading(true)
       const res = await publicRequest.get(
         `/Candidate/SearchByClientID?Clientid=${clientId}`,
         {
           headers: {
-            Accept: "*",
+            Accept: '*',
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
-      );
+      )
 
       if (res.data) {
-        setRows(res.data?.data?.reverse());
-        setLoading(false);
+        setRows(res.data?.data?.reverse())
+        setLoading(false)
       } else {
-        console.log(res.data);
+        console.log(res.data)
       }
     } catch (error) {
-      setLoading(false);
-      setError(true);
-      setErrorMessage(error);
+      setLoading(false)
+      setError(true)
+      setErrorMessage(error)
 
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
   // END OF FUNCTION TO GET AND SET ALL CANDIDATES
 
   // FUNCTION TO HANDLE PHONE NUMBER CHANGE
   const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target?.value);
-  };
+    setPhoneNumber(e.target?.value)
+  }
   // END OF FUNCTION TO HANDLE PHONE NUMBER CHANGE
 
   // FUNCTION TO HANDLE CANDIDATE SEARCH
   const handleCandidateSearch = async () => {
-    toastId.current = toast("Please wait...", {
+    toastId.current = toast('Please wait...', {
       autoClose: 3000,
       isLoading: true,
-    });
+    })
     try {
       const res = await publicRequest.get(
         `Candidate/SearchByPhoneNumber?Clientid=${clientId}&phone=${phoneNumber?.trim()}`,
         {
           headers: {
-            Accept: "*",
+            Accept: '*',
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
-      );
+      )
 
       if (res?.data?.data?.length === 0) {
-        throw new Error("Candidate not found");
+        throw new Error('Candidate not found')
       } else {
         toast.update(toastId.current, {
-          render: "Candidate found!",
-          type: "success",
+          render: 'Candidate found!',
+          type: 'success',
           isLoading: false,
           autoClose: 3000,
-        });
-        setRows(res?.data?.data);
+        })
+        setRows(res?.data?.data)
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
       toast.update(toastId.current, {
-        type: "error",
+        type: 'error',
         autoClose: 3000,
         isLoading: false,
         render: `${
           error?.response?.data?.title ||
           error?.response?.data?.description ||
           error?.message ||
-          "Something went wrong, please try again"
+          'Something went wrong, please try again'
         }`,
-      });
+      })
     }
-  };
+  }
   // END FUNCTION TO HANDLE CANDIDATE SEARCH
 
   // USE EFFECT TO GET ALL CANDIDATES AS THE PAGE LOADS
   useEffect(() => {
-    getAllCandidates();
-  }, []);
+    getAllCandidates()
+  }, [])
 
   return (
-    <div className="candidateSearchWrapper">
+    <div className='candidateSearchWrapper'>
       <Sidebar />
-      <div className="candidateSearchRight">
+      <div className='candidateSearchRight'>
         <Topber userName={props?.userDetails?.name} />
         {loading || error ? (
           loading ? (
@@ -132,10 +133,10 @@ const CandidateSearch = (props) => {
             <ErrorComponent errorMessage={errorMessage && errorMessage} />
           )
         ) : (
-          <div className="candidateSearchMainWrapper">
-            <div className="candidateSearchMainTop">
-              <h3 className="candidateSearchMainTopTitle">Search</h3>
-              <div className="candidateSearchMainTopForm">
+          <div className='candidateSearchMainWrapper'>
+            <div className='candidateSearchMainTop'>
+              <h3 className='candidateSearchMainTopTitle'>Search</h3>
+              <div className='candidateSearchMainTopForm'>
                 {/* <FormControl className='companySelect'>
                 <InputLabel id='demo-simple-select-label'>
                   Company name
@@ -153,28 +154,28 @@ const CandidateSearch = (props) => {
                 </Select>
               </FormControl> */}
                 <TextField
-                  id="outlined-search"
-                  label="Candidate Phone no"
-                  type="search"
-                  className="candidateName"
+                  id='outlined-search'
+                  label='Candidate Phone no'
+                  type='search'
+                  className='candidateName'
                   onChange={(e) => handlePhoneNumberChange(e)}
                 />
 
                 <div
-                  className="candidateSearchBtn"
+                  className='candidateSearchBtn'
                   onClick={handleCandidateSearch}
                 >
                   Search
                 </div>
-                <button className="reloadBtn" onClick={getAllCandidates}>
+                <button className='reloadBtn' onClick={getAllCandidates}>
                   Show All
                   <span>
-                    <RxReload className="reloadIcon" />
+                    <RxReload className='reloadIcon' />
                   </span>
                 </button>
               </div>
             </div>
-            <div className="candidateSearchMainBottom">
+            <div className='candidateSearchMainBottom'>
               {loading || error ? (
                 loading ? (
                   <Loading />
@@ -185,6 +186,7 @@ const CandidateSearch = (props) => {
                 <CandidateSearchDatagrid
                   userDetails={currentUser}
                   tableData={rows}
+                  getAllCandidates={getAllCandidates}
                 />
               )}
             </div>
@@ -192,7 +194,7 @@ const CandidateSearch = (props) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CandidateSearch;
+export default CandidateSearch

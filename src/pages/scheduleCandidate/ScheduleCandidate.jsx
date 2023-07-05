@@ -150,6 +150,9 @@ const ScheduleCandidate = () => {
 
   const userName = currentUser?.data?.profile?.clientName
 
+  // GET CURRENT USER TOKEN
+  const token = useSelector((state) => state?.user?.currentUser?.data?.token)
+
   // TO SET THE STATE OF TEST CATEGORY INPUT
   const [loadingTestCategory, setLoadingTestCategory] = useState(true)
 
@@ -216,7 +219,12 @@ const ScheduleCandidate = () => {
 
     try {
       await publicRequest
-        .post('/Candidate', scheduleInfo)
+        .post('/Candidate', scheduleInfo, {
+          headers: {
+            Accept: '*',
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then(() => {
           toast.update(toastId.current, {
             render: 'Candidate scheduled succesfully!',
@@ -277,8 +285,12 @@ const ScheduleCandidate = () => {
   // function to get all TestCategories
   const getAllTestCategories = async () => {
     try {
-      const res = await publicRequest.get(`Test/test-category/${clientId}`)
-      console.log(clientId)
+      const res = await publicRequest.get(`Test/test-category/${clientId}`, {
+        headers: {
+          Accept: '*',
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
       if (res.data) {
         setTestCategory(res.data.data)
