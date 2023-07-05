@@ -62,7 +62,6 @@ const Register = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className='loginWrapper'>
         <div className='loginWrapperLeft'>
           <img

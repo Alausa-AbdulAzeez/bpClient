@@ -11,6 +11,7 @@ import ScheduleCandidate from './pages/scheduleCandidate/ScheduleCandidate'
 import ResetPassword from './pages/resetPassword/ResetPassword'
 import ForgotPassword from './pages/forgotPassword/ForgotPassword'
 import ChangePassword from './pages/changePassword/ChangePassword'
+import PrivateRoutes from './components/PrivateRoutes'
 
 function App() {
   // let userDetails
@@ -50,13 +51,15 @@ function App() {
     <div className='appWrapper'>
       <BrowserRouter>
         <Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route exact path='/' element={<Home />} />
+            <Route path='/candidates' element={<CandidateSearch />} />
+            <Route path='/scheduleCandidate' element={<ScheduleCandidate />} />
+            <Route path='/pendingCandidates' element={<PendingCandidates />} />
+            <Route path='/viewClients' element={<ViewClients />} />
+            <Route path='/reports' element={<Reports />} />
+          </Route>
           <Route exact path='/login' element={<Register />} />
-          <Route exact path='/' element={<Home />} />
-          <Route path='/candidates' element={<CandidateSearch />} />
-          <Route path='/scheduleCandidate' element={<ScheduleCandidate />} />
-          <Route path='/pendingCandidates' element={<PendingCandidates />} />
-          <Route path='/viewClients' element={<ViewClients />} />
-          <Route path='/reports' element={<Reports />} />
           <Route path='/getToken' element={<ForgotPassword />} />
           <Route path='/forgotPassword' element={<ResetPassword />} />
           <Route path='/changePassword' element={<ChangePassword />} />
