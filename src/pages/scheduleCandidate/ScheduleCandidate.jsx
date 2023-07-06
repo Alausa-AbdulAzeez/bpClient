@@ -68,7 +68,7 @@ const ScheduleCandidate = () => {
     createdDate: date,
     email: "",
     address: "",
-    appointmentdate: null,
+    appointmentdate: date,
     clientid: clientId?.toString(),
     testcategory: "",
     status: "PENDING",
@@ -86,6 +86,7 @@ const ScheduleCandidate = () => {
       isLoading: true,
     });
     setDisableDoneAndCancelBtn(true);
+    console.log(scheduleInfo);
 
     try {
       await publicRequest

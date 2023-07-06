@@ -1,36 +1,36 @@
-import { React } from 'react'
-import { MdPendingActions, MdSchedule } from 'react-icons/md'
-import { AiOutlineSearch } from 'react-icons/ai'
-import { BsFillPersonFill } from 'react-icons/bs'
+import { React } from "react";
+import { MdPendingActions, MdSchedule } from "react-icons/md";
+import { AiOutlineSearch } from "react-icons/ai";
+import { BsFillPersonFill } from "react-icons/bs";
 
 export const clientDashboardData = [
   {
-    title: 'Schedule Candidate',
+    title: "Schedule Candidate",
     isMoney: false,
-    link: 'scheduleCandidate',
+    link: "scheduleCandidate",
     isScheduleCandidate: true,
-    linkText: 'Schedule Candidate',
-    backgroundColor: '#33a23e24',
-    name: '2',
+    linkText: "Schedule Candidate",
+    backgroundColor: "#33a23e24",
+    name: "2",
     icon: (
       <MdSchedule
-        className='icon'
-        style={{ color: '#33A23E', backgroundColor: '#33A23E36' }}
+        className="icon"
+        style={{ color: "#33A23E", backgroundColor: "#33A23E36" }}
       />
     ),
   },
   {
-    title: 'Candidate Search',
+    title: "Candidate Search",
     isMoney: false,
-    link: 'candidateSearch',
-    linkText: 'See all laboratories',
+    link: "candidate",
+    linkText: "See all laboratories",
     isCandidateSearch: true,
-    backgroundColor: '#ece8ff7b',
-    name: '50',
+    backgroundColor: "#ece8ff7b",
+    name: "50",
     icon: (
       <AiOutlineSearch
-        className='icon'
-        style={{ color: '#7451f8', backgroundColor: '#e1dbfd' }}
+        className="icon"
+        style={{ color: "#7451f8", backgroundColor: "#e1dbfd" }}
       />
     ),
   },
@@ -51,19 +51,19 @@ export const clientDashboardData = [
   // },
 
   {
-    title: 'Profile',
+    title: "Profile",
     isMoney: true,
-    link: '/profile',
+    link: "/profile",
     isProfile: true,
-    linkText: 'View profile',
-    backgroundColor: '#3971ff24',
-    name: 'Unity Bank',
+    linkText: "View profile",
+    backgroundColor: "#3971ff24",
+    name: "Unity Bank",
 
     icon: (
       <BsFillPersonFill
-        className='icon'
-        style={{ color: '#3970FF', backgroundColor: '#3970FF36' }}
+        className="icon"
+        style={{ color: "#3970FF", backgroundColor: "#3970FF36" }}
       />
     ),
   },
-]
+];
