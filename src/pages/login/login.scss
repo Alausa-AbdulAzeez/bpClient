@@ -6,14 +6,12 @@
   background: linear-gradient(rgba(128, 0, 128, 0.58), rgba(255, 0, 0, 0.29));
   background: radial-gradient(#7551f8bc, rgba(246, 242, 242, 0.29));
 
-  background: radial-gradient(
-    222.43% 335.73% at 25.87% 87.4%,
-    #7551f8bc 6.55%,
-    #b7cbf0 25%,
-    #fff 50%,
-    #a699c2 75%,
-    #bec9c3 100%
-  );
+  background: radial-gradient(222.43% 335.73% at 25.87% 87.4%,
+      #7551f8bc 6.55%,
+      #b7cbf0 25%,
+      #fff 50%,
+      #a699c2 75%,
+      #bec9c3 100%);
 
   // background: linear-gradient(rgba(128, 0, 128, 0.58), rgba(255, 0, 0, 0.29));
   // background: radial-gradient(
@@ -30,10 +28,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(
-      rgba(128, 0, 128, 0.58),
-      rgba(255, 0, 0, 0.192)
-    );
+    background: linear-gradient(rgba(128, 0, 128, 0.58),
+        rgba(255, 0, 0, 0.192));
     background: linear-gradient(rgba(128, 0, 128, 0.58), rgba(255, 0, 0, 0.29));
     background: none;
 
@@ -43,6 +39,7 @@
       object-fit: contain;
     }
   }
+
   .loginWrapperRight {
     width: 45%;
     height: 100%;
@@ -69,6 +66,7 @@
         color: rgb(0, 0, 0);
         text-align: center;
       }
+
       .loginInputs {
         display: flex;
         flex-direction: column;
@@ -78,7 +76,7 @@
         .passwordWrapper {
           position: relative;
 
-          & > span {
+          &>span {
             position: absolute;
             top: 20%;
             right: 30px;
@@ -116,6 +114,7 @@
           }
         }
       }
+
       .loginBtn {
         background-color: rgb(0, 79, 128);
         background-color: rgb(1, 42, 68);
@@ -127,6 +126,7 @@
         cursor: pointer;
         font-weight: bold;
         font-size: 16px;
+
         &:disabled {
           // background-color: rgba(1, 42, 68, 0.742);
           // background-color: rgb(129, 58, 129);
@@ -145,18 +145,50 @@
   width: fit-content;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1024px) {
+  .loginWrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+
+    .loginWrapperRight {
+      width: 80%;
+      height: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+
+      .loginFormWrapper {
+        width: 80%;
+        height: 100%;
+        padding: 30px;
+        overflow: auto;
+      }
+    }
+  }
+}
+@media screen and (max-width: 700px) {
   .loginWrapper {
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
     .loginWrapperRight {
-      width: 90%;
+      width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+
+
+      .loginFormWrapper {
+        width: 80%;
+        height: 80%;
+        padding: 30px;
+      }
     }
   }
 }
