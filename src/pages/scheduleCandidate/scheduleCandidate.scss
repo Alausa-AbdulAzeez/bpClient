@@ -266,6 +266,12 @@
           border: none;
           outline: none;
           border-radius: 10px;
+
+          &:disabled{
+            cursor: not-allowed;
+            background-color: #7551f87c;
+
+          }
         }
         .cancelClientEditBtn {
           cursor: pointer;
@@ -279,6 +285,10 @@
           outline: none;
           border-radius: 10px;
           margin-bottom: 20px;
+
+          &:disabled{
+            cursor: not-allowed;
+          }
         }
       }
     }
