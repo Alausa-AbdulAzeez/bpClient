@@ -8,8 +8,28 @@
   position: sticky;
   top: 0;
 
+  .TopbarImageWrapper{
+    display: none;
+  }
+
   .topbarIcon {
     font-size: 24px;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+  .topbarWrapper{
+    padding: 0px 32px;
+  .TopbarImageWrapper {
+      display: block;
+      height: 25px;
+
+      img{
+        height: 100%;
+      }
+    }
+
   }
 }

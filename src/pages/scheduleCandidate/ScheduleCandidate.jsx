@@ -30,7 +30,7 @@ const ScheduleCandidate = () => {
   // TO SET THE STATE OF TEST CATEGORY INPUT
   const [loadingTestCategory, setLoadingTestCategory] = useState(true);
 
-  // TO SET THE STATE OF THE DONE BUTTON
+  // TO SET THE STATE OF THE DONE AND CANCEL BUTTONS
   const [disableDoneAndCancelBtn, setDisableDoneAndCancelBtn] = useState(false);
 
   // FILE TO BE UPLOADED

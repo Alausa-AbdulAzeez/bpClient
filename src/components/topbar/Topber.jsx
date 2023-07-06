@@ -1,14 +1,18 @@
-import React from 'react'
-import { BsFillPersonFill } from 'react-icons/bs'
-import './topbar.scss'
+import React from "react";
+import { BsFillPersonFill } from "react-icons/bs";
+import LogoImg from "../../utils/images/sidebarBiopath2.png";
+import "./topbar.scss";
 
 const Topber = (props) => {
   return (
-    <div className='topbarWrapper'>
+    <div className="topbarWrapper">
       <h3>{props.userName}</h3>
-      <BsFillPersonFill className='topbarIcon' />
+      <div className="TopbarImageWrapper">
+        <img src={LogoImg} alt="Logo" />
+      </div>
+      <BsFillPersonFill className="topbarIcon" />
     </div>
-  )
-}
+  );
+};
 
-export default Topber
+export default Topber;
