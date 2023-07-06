@@ -77,16 +77,16 @@ const Register = () => {
           />
         </div>
         <div className="loginWrapperRight">
-          <form className="loginFormWrapper">
+          <form className="loginFormWrapper" onSubmit={handleLogin}>
             {/* <div className='loginTest'>Trying to test, click</div> */}
             <div className="loginHeading">Log in</div>
             <div className="loginInputs">
-              <label htmlFor="">Email</label>
+              <label htmlFor="email">Email</label>
               <input
+                id="email"
                 type="email"
                 className="loginEmailInput loginInput"
                 placeholder="example@****.com"
-                data-testid="emailTestId"
                 onChange={(e) => handleSetUser(e, "email")}
               />
               <label htmlFor="">Password</label>
@@ -112,7 +112,7 @@ const Register = () => {
               type={"submit"}
               disabled={btnDisabled}
               data-testid="loginBtn"
-              onClick={handleLogin}
+              // onClick={handleLogin}
             >
               Login
             </button>
