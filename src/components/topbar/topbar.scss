@@ -7,8 +7,10 @@
   border-bottom: 1px solid var(--border-silver-color);
   position: sticky;
   top: 0;
+  z-index: 2;
+  background-color: white;
 
-  .TopbarImageWrapper{
+  .TopbarImageWrapper {
     display: none;
   }
 
@@ -19,17 +21,15 @@
 }
 
 @media screen and (max-width: 700px) {
-
-  .topbarWrapper{
+  .topbarWrapper {
     padding: 0px 32px;
-  .TopbarImageWrapper {
+    .TopbarImageWrapper {
       display: block;
       height: 25px;
 
-      img{
+      img {
         height: 100%;
       }
     }
-
   }
 }
