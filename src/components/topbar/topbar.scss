@@ -20,16 +20,11 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 767px) {
   .topbarWrapper {
-    padding: 0px 32px;
-    .TopbarImageWrapper {
-      display: block;
-      height: 25px;
+    padding: 0 16px;
 
-      img {
-        height: 100%;
-      }
-    }
+
   }
+
 }

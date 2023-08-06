@@ -6,7 +6,7 @@ import "./topbar.scss";
 const Topber = (props) => {
   return (
     <div className="topbarWrapper">
-      <h3>{props.userName}</h3>
+      <h3 className="topbarClientName">{props.userName}</h3>
       <div className="TopbarImageWrapper">
         <img src={LogoImg} alt="Logo" />
       </div>
