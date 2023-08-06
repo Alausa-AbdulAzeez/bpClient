@@ -1,12 +1,12 @@
 .scheduleCandidateWrapper {
   width: 100%;
-  display: flex;
-  height: calc(100% - 0px);
-  position: relative;
-  overflow-y: auto;
+    display: flex;
+    height: calc(100vh - 0px);
 
   .scheduleCandidateRight {
     flex: 5;
+      overflow-y: auto !important;
+      height: 100%;
 
     .scheduleCandidateMainWrapper {
       height: 100%;
@@ -166,12 +166,12 @@
   outline: none;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 767px) {
   .scheduleCandidateWrapper {
     height: auto;
     .scheduleCandidateRight {
       .scheduleCandidateMainWrapper {
-        padding: 10px 32px;
+        padding: 10px 16px !important;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -180,10 +180,14 @@
           width: 300px;
           & > .inputsWrapper {
             width: 100%;
+            display: flex;
+              flex-direction: column;
+              align-items: center;
             .singleInput {
               // background-color: red;
-              width: 100%;
+              width: 90%;
               flex: none;
+                
               p {
               }
               .inputWrapper {

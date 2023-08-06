@@ -1,10 +1,12 @@
 .candidateSearchWrapper {
   width: 100%;
   display: flex;
+  height: calc(100vh - 0px);
 
   .candidateSearchRight {
     flex: 5;
     overflow-x: hidden;
+    overflow-y: auto !important;
 
     .candidateSearchMainWrapper {
       padding: 30px 64px;
@@ -83,3 +85,54 @@
     }
   }
 }
+@media screen and (max-width: 767px) {
+  .candidateSearchMainWrapper {
+    padding: 30px 16px !important;
+
+    .candidateSearchMainTop{
+      margin-top: 30px;
+
+      .candidateSearchMainTopTitle{
+        display: none;
+      }
+      .candidateSearchMainTopForm{
+        display: flex;
+        flex-direction: column;
+        align-items: center !important;
+        gap: 10px;
+ 
+
+        .candidateName{
+          margin-right: 0 !important;
+          width: 80% !important;
+          max-width: 300px !important;
+        }
+
+        .reloadBtn{
+          margin-left: 0 !important;
+        }
+      }
+
+    }
+
+    // .filterContainer {
+    //   width: 100% !important;
+    //   flex-direction: column;
+    //   min-height: 250px;
+    //   height: auto !important;
+    //   padding: 0 20px !important;
+    //   align-items: center;
+    //   justify-content: center;
+    //   gap: 5px;
+    //   border-radius: 0px !important;
+    //   overflow-y: auto !important;
+
+    //   .resetBtn,
+    //   .searchFilterBtn {
+    //     margin-left: 0 !important;
+    //   }
+    // }
+  }
+}
+
+

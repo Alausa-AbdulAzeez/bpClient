@@ -19,6 +19,8 @@ const CandidateSearch = (props) => {
   const { currentUser } = useSelector((state) => state?.user);
   const clientId = currentUser?.data?.profile?.clientId;
 
+  const userName = currentUser?.data?.profile?.clientName;
+
   // GET CURRENT USER TOKEN
   const token = useSelector((state) => state?.user?.currentUser?.data?.token);
 
@@ -127,7 +129,7 @@ const CandidateSearch = (props) => {
       <div className="candidateSearchWrapper">
         <Sidebar />
         <div className="candidateSearchRight">
-          <Topber userName={props?.userDetails?.name} />
+          <Topber userName={userName} />
           {loading || error ? (
             loading ? (
               <Loading />
@@ -145,6 +147,7 @@ const CandidateSearch = (props) => {
                     type="search"
                     className="candidateName"
                     onChange={(e) => handlePhoneNumberChange(e)}
+                    // size="small"
                   />
 
                   <div
