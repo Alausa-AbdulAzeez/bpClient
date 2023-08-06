@@ -3,8 +3,9 @@
   height: 100vh;
   border-right: 1px solid var(--border-silver-color);
   min-width: 250px;
-  position: sticky;
-  top: 0;
+  // position: sticky;
+  // top: 0;
+  overflow-y: auto;
 
   .sidebarTop {
     height: 50px;
@@ -14,6 +15,10 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+        position: sticky;
+          top: 0;
+          bottom: 0;
+          background-color: white;
 
     .sidebarTopImageWrapper {
       height: 100%;
