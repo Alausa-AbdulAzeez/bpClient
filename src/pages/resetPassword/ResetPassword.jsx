@@ -54,12 +54,10 @@ const ResetPassword = () => {
 
   // FUNCTION FOR ONCLICK LOGIN BUTTON
   const handleResetPassword = async (e) => {
-    console.log(user);
     e.preventDefault();
     try {
       if (user?.password === user?.confirmPassword) {
         const res = await publicRequest.post("/Account/reset-password", user);
-        console.log(res);
       } else {
         toast.error("Passwords don't match!", {
           autoClose: 2000,

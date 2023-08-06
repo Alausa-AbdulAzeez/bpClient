@@ -308,8 +308,6 @@ const CandidateSearchDatagrid = (props) => {
     if (position !== "0") {
       setPosition("0");
     }
-
-    console.log(row, e);
   };
   // END OF HANDLE ROW CLICK
 

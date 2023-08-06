@@ -79,7 +79,6 @@ const PrivateRoutes = () => {
           });
         });
     }
-    console.log(isLoggedIn);
   }, [isLoggedIn]);
 
   useEffect(() => {}, []);
