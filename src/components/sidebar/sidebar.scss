@@ -8,6 +8,7 @@
   overflow-y: auto;
 
   .sidebarTop {
+    
     height: 50px;
     width: 100%;
     border-bottom: 1px solid var(--border-silver-color);
@@ -37,6 +38,11 @@
     flex-direction: column;
     justify-content: space-between;
     height: calc(100% - 50px);
+
+    .sidebarBottomTop{
+      // background-color: red;
+    }
+
 
     .ulTitle {
       color: var(--text-silver-color);
